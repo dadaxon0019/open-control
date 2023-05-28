@@ -8,8 +8,8 @@ class CustomTextField extends StatelessWidget {
   final bool isPassword;
   final TextEditingController controller;
   final Color? bgColor;
-  final maxLine;
-  final minLine;
+  // final maxLine;
+  // final minLine;
   const CustomTextField({
     super.key,
     required this.controller,
@@ -18,8 +18,8 @@ class CustomTextField extends StatelessWidget {
     this.isPassword = false,
     this.textInputType = TextInputType.text,
     this.bgColor,
-    this.maxLine,
-    this.minLine,
+    // this.maxLine,
+    // this.minLine,
   });
 
   @override
@@ -31,8 +31,8 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       keyboardType: textInputType,
       obscureText: isPassword,
-      maxLines: maxLine,
-      minLines: minLine,
+      // maxLines: maxLine,
+      // minLines: minLine,
       style: Theme.of(context).textTheme.titleMedium,
       decoration: InputDecoration(
         hintText: hintText,

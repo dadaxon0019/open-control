@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:intl/intl.dart';
 import 'package:opencontrol/constants/constants_colors.dart';
 import 'package:opencontrol/data/chat_builder.dart';
@@ -15,9 +16,34 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  TextEditingController controller = TextEditingController();
-  final ScrollController scrollController = ScrollController();
-  List<ChatMessage> chatMessage = [];
+  final TextEditingController controller = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+  final List<ChatMessage> chatMessage = [];
+  final GlobalKey lastKey = GlobalKey();
+  final time = DateFormat('hh:mm').format(DateTime.now());
+
+  void add() {
+    setState(
+      () {
+        if (controller.text != '') {
+          chatMessage.add(
+            ChatMessage(
+                time: time,
+                messageContent: controller.text.toString(),
+                messageType: 'receiver'),
+          );
+        }
+      },
+    );
+    SchedulerBinding.instance.addPostFrameCallback((_) => scrollToEnd());
+  }
+
+  void scrollToEnd() async {
+    await _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 350),
+        curve: Curves.easeOut);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +57,10 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           ChatBuilder(
+            lastKey: lastKey,
             chatMessage: chatMessage,
             controller: controller,
-            scrollController: scrollController,
+            scrollController: _scrollController,
           ),
           SafeArea(
             child: Align(
@@ -55,10 +82,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           .withAlpha(100),
                       border: Border(
                         bottom: BorderSide(
-                          color: true
-                              ? Theme.of(context).cardColor.withAlpha(40)
-                              : Colors.transparent,
-                        ),
+                            color: Theme.of(context).cardColor.withAlpha(40)),
                       ),
                     ),
                     child: Row(
@@ -93,20 +117,8 @@ class _ChatScreenState extends State<ChatScreen> {
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                              var time =
-                                  DateFormat('hh:mm').format(DateTime.now());
-                              scrollController.animateTo(
-                                  scrollController.position.pixels,
-                                  duration: Duration(milliseconds: 300),
-                                  curve: Curves.easeInOut);
-                              if (controller.text != '')
-                                chatMessage.add(
-                                  ChatMessage(
-                                      time: time,
-                                      messageContent:
-                                          controller.text.toString(),
-                                      messageType: 'receiver'),
-                                );
+                              add();
+                              scrollToEnd();
                             });
                           },
                           child: Image.asset(
@@ -130,16 +142,14 @@ class _ChatScreenState extends State<ChatScreen> {
                   sigmaY: 9.0,
                 ),
                 child: Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(25),
                   decoration: BoxDecoration(
                     color: Theme.of(context)
                         .scaffoldBackgroundColor
                         .withAlpha(100),
-                    border: Border(
+                    border: const Border(
                       bottom: BorderSide(
-                        color: true
-                            ? Theme.of(context).cardColor.withAlpha(40)
-                            : Colors.transparent,
+                        color: Colors.transparent,
                       ),
                     ),
                   ),
@@ -150,33 +160,20 @@ class _ChatScreenState extends State<ChatScreen> {
                         'assets/images/Vector.png',
                         color: Theme.of(context).dividerColor,
                       ),
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       Expanded(
                         child: CustomTextField(
-                          minLine: 1,
-                          maxLine: 2,
                           bgColor: Theme.of(context).dividerColor,
                           hintText: 'Type your message',
                           controller: controller,
                         ),
                       ),
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            var time =
-                                DateFormat('hh:mm').format(DateTime.now());
-                            scrollController.animateTo(
-                                scrollController.position.maxScrollExtent,
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.easeInOut);
-                            if (controller.text != '')
-                              chatMessage.add(
-                                ChatMessage(
-                                    time: time,
-                                    messageContent: controller.text.toString(),
-                                    messageType: 'sender'),
-                              );
+                            add();
+                            scrollToEnd();
                           });
                         },
                         child: Image.asset(
