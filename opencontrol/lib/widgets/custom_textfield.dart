@@ -7,6 +7,9 @@ class CustomTextField extends StatelessWidget {
   final TextInputType textInputType;
   final bool isPassword;
   final TextEditingController controller;
+  final Color? bgColor;
+  final maxLine;
+  final minLine;
   const CustomTextField({
     super.key,
     required this.controller,
@@ -14,6 +17,9 @@ class CustomTextField extends StatelessWidget {
     this.maskTextInputFormatter,
     this.isPassword = false,
     this.textInputType = TextInputType.text,
+    this.bgColor,
+    this.maxLine,
+    this.minLine,
   });
 
   @override
@@ -25,6 +31,8 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       keyboardType: textInputType,
       obscureText: isPassword,
+      maxLines: maxLine,
+      minLines: minLine,
       style: Theme.of(context).textTheme.titleMedium,
       decoration: InputDecoration(
         hintText: hintText,
@@ -32,7 +40,7 @@ class CustomTextField extends StatelessWidget {
               color: Theme.of(context).hintColor,
             ),
         filled: true,
-        fillColor: Theme.of(context).cardColor,
+        fillColor: bgColor ?? Theme.of(context).cardColor,
         contentPadding: const EdgeInsets.symmetric(horizontal: 12),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50.0),

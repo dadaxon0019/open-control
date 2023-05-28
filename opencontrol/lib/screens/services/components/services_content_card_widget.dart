@@ -40,13 +40,15 @@ class ServicesContentCardWidget extends StatelessWidget {
               ),
               Text(
                 description,
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(color: Color(0xffC8C8C8)),
               ),
               const SizedBox(
                 height: 15,
               ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Column(
                     children: [
@@ -58,7 +60,7 @@ class ServicesContentCardWidget extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                      Text('Вид контролья'),
+                      Text('Вид'),
                     ],
                   ),
                   Column(
@@ -71,9 +73,7 @@ class ServicesContentCardWidget extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                      Text(
-                        'Вид контролья',
-                      ),
+                      Text('Вид'),
                     ],
                   ),
                   Column(
@@ -86,7 +86,7 @@ class ServicesContentCardWidget extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                      Text('Вид контролья'),
+                      Text('Вид'),
                     ],
                   ),
                 ],

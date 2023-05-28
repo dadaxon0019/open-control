@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:opencontrol/screens/chat/chat_screen.dart';
 import 'package:opencontrol/screens/meetings_screan.dart';
 import 'package:opencontrol/themes.dart';
 import 'package:opencontrol/widgets/on_tap_scale_and_fade.dart';
@@ -54,7 +55,14 @@ class BottomNavigation extends StatelessWidget {
               ),
               BottomNavBtn(
                 icon: CupertinoIcons.chat_bubble_2,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const ChatScreen(),
+                    ),
+                  );
+                },
                 isSelected: false,
               ),
             ],

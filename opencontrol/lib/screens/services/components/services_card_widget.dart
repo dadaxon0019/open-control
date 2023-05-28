@@ -21,11 +21,7 @@ class ServicesCardWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(0.8),
         child: Container(
-          padding: const EdgeInsets.only(
-            top: 18,
-            bottom: 18,
-            left: 10,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
           decoration: BoxDecoration(
             color: const Color(0xff1F1F1F),
             borderRadius: BorderRadius.circular(22),
@@ -36,22 +32,26 @@ class ServicesCardWidget extends StatelessWidget {
               const SizedBox(
                 width: 12,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    subTitle,
-                    style: const TextStyle(color: Color(0xffC8C8C8)),
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      subTitle,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Color(0xffC8C8C8)),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

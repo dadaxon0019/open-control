@@ -2,45 +2,38 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:opencontrol/constants/constants_colors.dart';
-import 'package:opencontrol/screens/chat/chat_screen.dart';
 import 'package:opencontrol/widgets/on_tap_scale_and_fade.dart';
 import 'package:opencontrol/widgets/primary_card.dart';
 import 'package:opencontrol/screens/services/components/services_card_widget.dart';
 import '../../widgets/bottom_navigation.dart';
 
-class MainPageScreen extends StatefulWidget {
-  const MainPageScreen({super.key});
+class HomePageScreen extends StatefulWidget {
+  const HomePageScreen({super.key});
 
   @override
-  State<MainPageScreen> createState() => _MainPageScreenState();
+  State<HomePageScreen> createState() => _HomePageScreenState();
 }
 
-class _MainPageScreenState extends State<MainPageScreen> {
+class _HomePageScreenState extends State<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment(0, 0),
-              end: Alignment(0, 2.5),
-              colors: [
-            homePageBackColor,
-            homePageSecondColor,
-          ])),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Stack(
-          children: [
-            SafeArea(
-              minimum: const EdgeInsets.only(
-                right: 24,
-                left: 24,
-                top: 30,
-              ),
-              child: ListView(
-                physics: const BouncingScrollPhysics(),
-                children: [
-                  Column(
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: Stack(
+        children: [
+          Positioned(
+            child: Container(
+              decoration: gradientBG,
+            ),
+          ),
+          SafeArea(
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 30, horizontal: 22),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
@@ -112,40 +105,39 @@ class _MainPageScreenState extends State<MainPageScreen> {
                             image: AssetImage(
                               'assets/images/book.png',
                             ),
-                            title: 'Alexander',
-                            subTitle: 'Hey, what`s up?',
+                            title: 'Органы контроля',
+                            subTitle:
+                                'Подробная информация о контрольно-надзорных органах',
                           ),
                           onTap: () {
-                            Route route = MaterialPageRoute(
-                                builder: (context) => const ChatScreen());
-                            Navigator.push(context, route);
+                            Navigator.pushNamed(context, '/services');
                           }),
                       const SizedBox(
                         height: 10,
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 9.0,
-                      sigmaY: 9.0,
-                    ),
-                    child: const BottomNavigation(),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 9.0,
+                    sigmaY: 9.0,
                   ),
+                  child: BottomNavigation(),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

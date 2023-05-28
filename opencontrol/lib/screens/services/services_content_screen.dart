@@ -16,29 +16,20 @@ class ServicesContentScreen extends StatefulWidget {
 class _ServicesContentScreenState extends State<ServicesContentScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment(0, 0),
-              end: Alignment(0, 2.5),
-              colors: [
-            homePageBackColor,
-            homePageSecondColor,
-          ])),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Stack(
-          children: [
-            SafeArea(
-              minimum: const EdgeInsets.only(
-                right: 20,
-                left: 20,
-                top: 30,
-              ),
-              child: ListView(
-                physics: const BouncingScrollPhysics(),
-                children: const [
-                  Column(
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: Stack(
+        children: [
+          Positioned(
+              child: Container(
+            decoration: gradientBG,
+          )),
+          SafeArea(
+            child: ListView(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
@@ -89,27 +80,27 @@ class _ServicesContentScreenState extends State<ServicesContentScreen> {
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 9.0,
-                      sigmaY: 9.0,
-                    ),
-                    child: const BottomNavigation(),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 9.0,
+                    sigmaY: 9.0,
                   ),
+                  child: const BottomNavigation(),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
