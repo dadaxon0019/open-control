@@ -1,10 +1,9 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:intl/intl.dart';
 import 'package:opencontrol/constants/constants_colors.dart';
-import 'package:opencontrol/data/chat_builder.dart';
+import 'package:opencontrol/screens/chat/chat_builder.dart';
 import 'package:opencontrol/data/chat_message.dart';
 import 'package:opencontrol/widgets/custom_textfield.dart';
 
@@ -98,14 +97,23 @@ class _ChatScreenState extends State<ChatScreen> {
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
                             const SizedBox(height: 8),
-                            Text(
-                              'Active',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(
-                                      color: Theme.of(context).primaryColor),
-                            ),
+                            Row(
+                              children: [
+                                ImageIcon(
+                                  AssetImage('assets/icons/round.png'),
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                Text(
+                                  'Active',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .copyWith(
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                         Expanded(child: Container()),

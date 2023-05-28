@@ -6,13 +6,13 @@ class CustomTextField extends StatelessWidget {
   final MaskTextInputFormatter? maskTextInputFormatter;
   final TextInputType textInputType;
   final bool isPassword;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final Color? bgColor;
   // final maxLine;
   // final minLine;
   const CustomTextField({
     super.key,
-    required this.controller,
+    this.controller,
     required this.hintText,
     this.maskTextInputFormatter,
     this.isPassword = false,

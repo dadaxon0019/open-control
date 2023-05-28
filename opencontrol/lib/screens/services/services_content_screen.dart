@@ -1,10 +1,10 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:opencontrol/constants/constants_colors.dart';
+import 'package:opencontrol/screens/services/components/services_second_card.dart';
+import 'package:opencontrol/widgets/custom_textfield.dart';
 import '../../widgets/bottom_navigation.dart';
 import 'components/services_content_card_widget.dart';
-import '../../widgets/text_field_home_page_widget.dart';
 
 class ServicesContentScreen extends StatefulWidget {
   const ServicesContentScreen({super.key});
@@ -55,7 +55,9 @@ class _ServicesContentScreenState extends State<ServicesContentScreen> {
                       SizedBox(
                         height: 28,
                       ),
-                      TextFieldHomePage(),
+                      CustomTextField(
+                        hintText: 'Search',
+                      ),
                       SizedBox(
                         height: 17,
                       ),
@@ -78,6 +80,10 @@ class _ServicesContentScreenState extends State<ServicesContentScreen> {
                       SizedBox(
                         height: 10,
                       ),
+                      ServicesSecondCard(
+                          title:
+                              'Объединение административно-технических инспекций города Москвы (ОАТИ) осуществляет контроль за благоустройством города и ....',
+                          description: 'Административная')
                     ],
                   ),
                 ),
